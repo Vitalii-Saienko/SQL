@@ -1,0 +1,39 @@
+-- 1 Определить, сколько покупок было совершено в каждый месяц. Отсортировать строки в порядке возрастания количества покупок.
+-- Вывести два поля - номер месяца и количество покупок
+USE shop;
+SELECT month(odate) AS month,
+count(order_id) AS sales_quantity
+FROM orders
+GROUP BY month
+ORDER BY sales_quantity;
+
+-- 2 Определить, в какой месяц было совершено больше всего покупок.  Вывести два поля - номер месяца и количество покупок
+SELECT MONTH(ODATE) AS month, COUNT(*) AS purchase_count
+FROM orders
+GROUP BY month
+ORDER BY purchase_count DESC
+LIMIT 1;
+
+-- Найти среднюю зарплату по компании
+USE hr;
+SELECT AVG(salary) AS average_salary
+FROM employees;
+
+-- Найти общее количество департаментов
+SELECT COUNT(*) AS total_departments
+FROM departments;
+
+-- Найти количество департаментов, в которых никто не работает
+SELECT COUNT(*) AS total_departments
+FROM departments
+WHERE manager_id IS NULL;
+
+-- Найти среднюю зарплату в департаменте с id 90
+SELECT AVG(salary) AS average_salary
+FROM employees
+WHERE department_id = 90;
+
+-- Найти самую большую зарплату среди сотрудников, работающих в департаментах с id 70 и 80
+SELECT MAX(salary) AS max_salary_in_70_and_80_dep
+FROM employees
+WHERE department_id IN (70, 80);
